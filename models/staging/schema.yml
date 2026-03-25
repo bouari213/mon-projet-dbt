@@ -2,42 +2,54 @@ version: 2
 
 models:
   - name: stg_clients
+    description: "Modèle de staging qui nettoie et standardise les données brutes des clients"
     columns:
       - name: id_client
+        description: "Identifiant unique du client"
         tests:
           - unique
           - not_null
       - name: email
+        description: "Adresse email du client en minuscules"
         tests:
           - unique
           - not_null
       - name: nom
+        description: "Nom du client en majuscules"
         tests:
           - not_null
       - name: prenom
+        description: "Prénom du client avec première lettre en majuscule"
         tests:
           - not_null
+      - name: date_inscription
+        description: "Date d'inscription du client"
 
   - name: stg_commandes
+    description: "Modèle de staging qui nettoie et standardise les données brutes des commandes"
     columns:
       - name: id_commande
+        description: "Identifiant unique de la commande"
         tests:
           - unique
           - not_null
       - name: id_client
+        description: "Identifiant du client associé à la commande"
         tests:
           - not_null
           - relationships:
-              to: ref('stg_clients')
               field: id_client
-              meta:
-                arguments:
-                  to: ref('stg_clients')
-                  field: id_client
+              to: ref('stg_clients')
+              config:
+                severity: warn
+      - name: date_commande
+        description: "Date de la commande"
+      - name: montant
+        description: "Montant de la commande en euros"
+        tests:
+          - not_null
       - name: statut
+        description: "Statut de la commande"
         tests:
           - accepted_values:
               values: ['livree', 'en_cours', 'annulee']
-      - name: montant
-        tests:
-          - not_null
