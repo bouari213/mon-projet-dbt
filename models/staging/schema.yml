@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_clients
+    columns:
+      - name: id_client
+        tests:
+          - unique
+          - not_null
+      - name: email
+        tests:
+          - unique
+          - not_null
+      - name: nom
+        tests:
+          - not_null
+      - name: prenom
+        tests:
+          - not_null
+
+  - name: stg_commandes
+    columns:
+      - name: id_commande
+        tests:
+          - unique
+          - not_null
+      - name: id_client
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_clients')
+              field: id_client
+              meta:
+                arguments:
+                  to: ref('stg_clients')
+                  field: id_client
+      - name: statut
+        tests:
+          - accepted_values:
+              values: ['livree', 'en_cours', 'annulee']
+      - name: montant
+        tests:
+          - not_null
