@@ -10,3 +10,4 @@ sources:
       - name: commandes_europe
       - name: commandes_usa
       - name: logs_connexion
+      - name: logs_connexion_v2
