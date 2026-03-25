@@ -8,10 +8,12 @@ commandes AS (
 
 final AS (
     SELECT
+        {{ dbt_utils.generate_surrogate_key(['c.id_commande', 'c.id_client']) }} AS sk_commande_client,
         c.id_commande,
         c.date_commande,
         c.montant,
         c.statut,
+        cl.id_client,
         cl.nom,
         cl.prenom,
         cl.email

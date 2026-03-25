@@ -7,3 +7,6 @@ sources:
     tables:
       - name: clients
       - name: commandes
+      - name: commandes_europe
+      - name: commandes_usa
+      - name: logs_connexion
