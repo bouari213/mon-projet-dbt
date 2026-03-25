@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: DBT_DEV
+    schema: RAW
+    tables:
+      - name: clients
+      - name: commandes
